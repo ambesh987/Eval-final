@@ -1,9 +1,9 @@
 const userModel=require("../Models/users");
 const bookModel = require("../Models/book");
 const CommentModel = require("../Models/comment");
-const jwtService = require("../CommonLib/jwtToken")
+const jwtService = require("../CommonLib/jwtToken");
 const { default: mongoose } = require("mongoose");
-const middlewares = require("../Middlewares/Validators")
+const middlewares = require("../Middlewares/Validators");
 
 async function Register(req,res){
     try{
@@ -38,11 +38,13 @@ catch(error){
 async function CreateBook(req,res){
     try {
         let path=req.file.path;
+        console.log(path)
         let detail=req.body;
+        console.log(detail);
         let userId=req.headers.userId;
         detail.timestamps=new Date();
         detail.coverImage=path;
-        detail.userId=mongoose.Types.Objectid(userId);
+        detail.userId=mongoose.Types.ObjectId(userId);
         let res=await bookModel.insertMany([detail]);
         console.log(res);
         res.status(200).json({
@@ -94,6 +96,7 @@ async function Comments(req,res){
   }
 
   async function GetAllBooks(req,res,next){
+      
 
   }
 module.exports={Register, CreateBook, Comments, Login, GetAllBooks}

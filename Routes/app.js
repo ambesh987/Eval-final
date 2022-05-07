@@ -23,7 +23,7 @@ app.use(express.json());
 app.post("/user",upload.array("profilePic",5),userControllers.Register);
 app.post("/book",upload.single("coverImage"),userControllers.CreateBook);
 
-app.post("/comments",userControllers.Comments);
-app.post("/login", userControllers.Login);
-app.post("/user/books",middlewares.isValidToken, userControllers.GetAllBooks);
+// app.post("/comments",userControllers.Comments);
+// app.post("/login", userControllers.Login);
+// app.post("/user/books",middlewares.isValidToken, userControllers.GetAllBooks);
 module.exports=app;
