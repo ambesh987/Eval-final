@@ -96,7 +96,24 @@ async function Comments(req,res){
   }
 
   async function GetAllBooks(req,res,next){
-      
+    try {
+        const skip = req.query.skip || 0;
+        const limit = req.query.limit || 10;
+        let response = await bookModel.find({}).skip(skip).limit(limit);
+        let totalCount = await bookModel.count();
+        res.json({
+          status: "sucessful",
+          message: "all books data send",
+          response,
+          totalCount,
+        });
+      } catch (error) {
+        return res.status(400).json({
+          status: "failed",
+          message: "all books data send error",
+        });
+      }
+
 
   }
 module.exports={Register, CreateBook, Comments, Login, GetAllBooks}
