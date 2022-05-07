@@ -21,4 +21,5 @@ const upload=multer({
 })
 app.use(express.json());
 app.post("/user",upload.array("profilePic",5),userControllers.Register);
+app.post("/book",upload.single("coverImage"),userControllers.CreateBook);
 module.exports=app;

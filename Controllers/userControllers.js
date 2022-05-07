@@ -29,4 +29,27 @@ catch(error){
 }
 
 }
-module.exports={Register}
+
+async function CreateBook(req,res){
+    try {
+        let path=req.file.path;
+        let detail=req.body;
+        let userId=req.headers.userId;
+        detail.timestamps=new Date();
+        detail.coverImage=path;
+        detail.userId=mongoose.Types.Objectid(userId);
+        let res=await BookModel.insertMany([detail]);
+        console.log(res);
+        res.status(200).json({
+           status:"success",
+           user:res,
+        })
+
+    } catch (error) {
+        res.status(400).json({
+            error:error
+        })
+        
+    }
+}
+module.exports={Register, CreateBook}
